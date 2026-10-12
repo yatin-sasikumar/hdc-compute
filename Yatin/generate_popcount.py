@@ -166,7 +166,7 @@ def main() -> None:
     module_name = args.module_name or f"popcount{n}"
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
-    output_path = output_dir / "popcount.sv"
+    output_path = output_dir / f"{module_name}.sv"
 
     rtl, count_width, compressor_count = build_rtl(n, module_name)
     output_path.write_text(rtl, encoding="utf-8")
