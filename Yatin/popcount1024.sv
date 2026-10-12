@@ -1,12 +1,17 @@
-module popcount1024 (
-    input  logic         clk,
-    input  logic         rst,
-    input  logic         in_valid,
-    input  logic [1023:0] bits_in,
-    output logic [10:0]  count,
-    output logic         out_valid
+module popcount1024 #(
+    parameter int N = 1024,
+    parameter int COUNT_WIDTH = 11
+) (
+    input  logic                    clk,
+    input  logic                    rst,
+    input  logic                    in_valid,
+    input  logic [N-1:0]            bits_in,
+    output logic [COUNT_WIDTH-1:0]  count,
+    output logic                    out_valid
 );
 
+    // This generated compressor network is specialized for the N value
+    // used by this Python script. Rerun the generator to change N.
 logic s_0;
 logic c_0;
 logic co_0;
@@ -4041,104 +4046,53 @@ compressor42 u_1005 (.x1(c_1002), .x2(co_1002), .x3(c_1003), .x4(co_1003), .cin(
 compressor42 u_1006 (.x1(c_1004), .x2(co_1004), .x3(s_1005), .x4(1'b0), .cin(1'b0), .sum(s_1006), .carry(c_1006), .cout(co_1006));
 compressor42 u_1007 (.x1(c_1005), .x2(co_1005), .x3(c_1006), .x4(co_1006), .cin(1'b0), .sum(s_1007), .carry(c_1007), .cout(co_1007));
 
-logic [19:0] row_a, row_b;
-logic [19:0] final_sum;
-logic [20:0] carry;
-assign carry[0] = 1'b0;
+logic [14:0] row_a;
+logic [14:0] row_b;
+logic [15:0] final_sum;
+logic [10:0] count_comb;
 assign row_a[0] = s_340;
 assign row_b[0] = 1'b0;
-assign final_sum[0] = row_a[0] ^ row_b[0] ^ carry[0];
-assign carry[1] = (row_a[0] & row_b[0]) | (row_a[0] & carry[0]) | (row_b[0] & carry[0]);
 assign row_a[1] = s_567;
 assign row_b[1] = 1'b0;
-assign final_sum[1] = row_a[1] ^ row_b[1] ^ carry[1];
-assign carry[2] = (row_a[1] & row_b[1]) | (row_a[1] & carry[1]) | (row_b[1] & carry[1]);
 assign row_a[2] = s_718;
 assign row_b[2] = 1'b0;
-assign final_sum[2] = row_a[2] ^ row_b[2] ^ carry[2];
-assign carry[3] = (row_a[2] & row_b[2]) | (row_a[2] & carry[2]) | (row_b[2] & carry[2]);
 assign row_a[3] = s_817;
 assign row_b[3] = s_818;
-assign final_sum[3] = row_a[3] ^ row_b[3] ^ carry[3];
-assign carry[4] = (row_a[3] & row_b[3]) | (row_a[3] & carry[3]) | (row_b[3] & carry[3]);
 assign row_a[4] = s_883;
 assign row_b[4] = s_884;
-assign final_sum[4] = row_a[4] ^ row_b[4] ^ carry[4];
-assign carry[5] = (row_a[4] & row_b[4]) | (row_a[4] & carry[4]) | (row_b[4] & carry[4]);
 assign row_a[5] = s_928;
 assign row_b[5] = 1'b0;
-assign final_sum[5] = row_a[5] ^ row_b[5] ^ carry[5];
-assign carry[6] = (row_a[5] & row_b[5]) | (row_a[5] & carry[5]) | (row_b[5] & carry[5]);
 assign row_a[6] = s_957;
 assign row_b[6] = 1'b0;
-assign final_sum[6] = row_a[6] ^ row_b[6] ^ carry[6];
-assign carry[7] = (row_a[6] & row_b[6]) | (row_a[6] & carry[6]) | (row_b[6] & carry[6]);
 assign row_a[7] = s_976;
 assign row_b[7] = 1'b0;
-assign final_sum[7] = row_a[7] ^ row_b[7] ^ carry[7];
-assign carry[8] = (row_a[7] & row_b[7]) | (row_a[7] & carry[7]) | (row_b[7] & carry[7]);
 assign row_a[8] = s_987;
 assign row_b[8] = s_988;
-assign final_sum[8] = row_a[8] ^ row_b[8] ^ carry[8];
-assign carry[9] = (row_a[8] & row_b[8]) | (row_a[8] & carry[8]) | (row_b[8] & carry[8]);
 assign row_a[9] = s_996;
 assign row_b[9] = 1'b0;
-assign final_sum[9] = row_a[9] ^ row_b[9] ^ carry[9];
-assign carry[10] = (row_a[9] & row_b[9]) | (row_a[9] & carry[9]) | (row_b[9] & carry[9]);
 assign row_a[10] = s_1001;
 assign row_b[10] = 1'b0;
-assign final_sum[10] = row_a[10] ^ row_b[10] ^ carry[10];
-assign carry[11] = (row_a[10] & row_b[10]) | (row_a[10] & carry[10]) | (row_b[10] & carry[10]);
 assign row_a[11] = s_1004;
 assign row_b[11] = 1'b0;
-assign final_sum[11] = row_a[11] ^ row_b[11] ^ carry[11];
-assign carry[12] = (row_a[11] & row_b[11]) | (row_a[11] & carry[11]) | (row_b[11] & carry[11]);
 assign row_a[12] = s_1006;
 assign row_b[12] = 1'b0;
-assign final_sum[12] = row_a[12] ^ row_b[12] ^ carry[12];
-assign carry[13] = (row_a[12] & row_b[12]) | (row_a[12] & carry[12]) | (row_b[12] & carry[12]);
 assign row_a[13] = s_1007;
 assign row_b[13] = 1'b0;
-assign final_sum[13] = row_a[13] ^ row_b[13] ^ carry[13];
-assign carry[14] = (row_a[13] & row_b[13]) | (row_a[13] & carry[13]) | (row_b[13] & carry[13]);
 assign row_a[14] = c_1007;
 assign row_b[14] = co_1007;
-assign final_sum[14] = row_a[14] ^ row_b[14] ^ carry[14];
-assign carry[15] = (row_a[14] & row_b[14]) | (row_a[14] & carry[14]) | (row_b[14] & carry[14]);
-assign row_a[15] = 1'b0;
-assign row_b[15] = 1'b0;
-assign final_sum[15] = row_a[15] ^ row_b[15] ^ carry[15];
-assign carry[16] = (row_a[15] & row_b[15]) | (row_a[15] & carry[15]) | (row_b[15] & carry[15]);
-assign row_a[16] = 1'b0;
-assign row_b[16] = 1'b0;
-assign final_sum[16] = row_a[16] ^ row_b[16] ^ carry[16];
-assign carry[17] = (row_a[16] & row_b[16]) | (row_a[16] & carry[16]) | (row_b[16] & carry[16]);
-assign row_a[17] = 1'b0;
-assign row_b[17] = 1'b0;
-assign final_sum[17] = row_a[17] ^ row_b[17] ^ carry[17];
-assign carry[18] = (row_a[17] & row_b[17]) | (row_a[17] & carry[17]) | (row_b[17] & carry[17]);
-assign row_a[18] = 1'b0;
-assign row_b[18] = 1'b0;
-assign final_sum[18] = row_a[18] ^ row_b[18] ^ carry[18];
-assign carry[19] = (row_a[18] & row_b[18]) | (row_a[18] & carry[18]) | (row_b[18] & carry[18]);
-assign row_a[19] = 1'b0;
-assign row_b[19] = 1'b0;
-assign final_sum[19] = row_a[19] ^ row_b[19] ^ carry[19];
-assign carry[20] = (row_a[19] & row_b[19]) | (row_a[19] & carry[19]) | (row_b[19] & carry[19]);
-logic [10:0] count_comb;
-
+assign final_sum = {1'b0, row_a} + {1'b0, row_b};
 assign count_comb = final_sum[10:0];
 
-always_ff @(posedge clk or posedge rst) begin
-    if (rst) begin
-        count     <= 11'd0;
-        out_valid <= 1'b0;
-    end else begin
-        out_valid <= in_valid;
-
-        if (in_valid)
-            count <= count_comb;
+    // Registered output with asynchronous active-high reset.
+    always_ff @(posedge clk or posedge rst) begin
+        if (rst) begin
+            count     <= '0;
+            out_valid <= 1'b0;
+        end else begin
+            out_valid <= in_valid;
+            if (in_valid)
+                count <= count_comb;
+        end
     end
-end
 
 endmodule
