@@ -9,10 +9,10 @@ module hdc_compute #(parameter int D=1024)(
     output logic op_valid,
     output logic [10:0]  hamm_dist
 );    
-    logic [1023:0] xor_reg;
+    logic [D-1:0] xor_reg;
     logic valid_reg;
   
-    logic [10:0] popcount_comb;
+    logic [$clog2(D):0] popcount_comb;
 
 
     always_ff @(posedge clk or posedge rst) begin

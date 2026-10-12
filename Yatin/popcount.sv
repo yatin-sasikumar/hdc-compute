@@ -10,8 +10,7 @@ module popcount1024 #(
     output logic                    out_valid
 );
 
-    // This generated compressor network is specialized for the N value
-    // used by this Python script. Rerun the generator to change N.
+    // Generated for N=1024; rerun the generator to change dimension.
 logic s_0;
 logic c_0;
 logic co_0;
